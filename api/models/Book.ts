@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-interface IBook extends Document {
+export interface IBook extends Document {
   title: string;
   author: string;
   description?: string;
@@ -19,15 +19,15 @@ interface IBook extends Document {
 }
 
 const bookSchema = new Schema<IBook>({
-  title: { type: String, required: true },
-  author: { type: String, required: true },
+  title: { type: String,  },
+  author: { type: String,  },
   description: { type: String },
   categories: { type: String },
-  price: { type: Number, required: true },
+  price: { type: Number,  },
   newPrice: { type: Number },
-  bookPicture: { type: String, required: true },
-  status: { type: String, required: true },
-  sellerId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  bookPicture: { type: String,  },
+  status: { type: String,  },
+  sellerId: { type: Schema.Types.ObjectId, ref: 'User',  },
   buyerId: { type: Schema.Types.ObjectId, ref: 'User', default: null },
   bookStore: { type: Schema.Types.ObjectId, ref: 'Store' },
   checkout: { type: Boolean, default: false },

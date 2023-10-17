@@ -1,72 +1,72 @@
 import express, { Request, Response } from 'express';
-import User from '../models/User'; // Adjust the path based on your project structure
+import Store from '../models/Store'; // Adjust the path based on your project structure
 
 const router = express.Router();
 
-// Create a new user
+// Create a new Store
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const newUser = await User.create(req.body);
-    res.status(201).json(newUser);
+    const newStore = await Store.create(req.body);
+    res.status(201).json(newStore);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-// Get all users
+// Get all Stores
 router.get('/', async (req: Request, res: Response) => {
   try {
-    const users = await User.find();
-    res.json(users);
+    const stores = await Store.find();
+    res.json(stores);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-// Get a specific user by ID
+// Get a specific Store by ID
 router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+    const store = await Store.findById(id);
+    if (!store) {
+      return res.status(404).json({ error: 'Store not found' });
     }
-    res.json(user);
+    res.json(Store);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-// Update a user by ID
+// Update a Store by ID
 router.put('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
-    if (!updatedUser) {
-      return res.status(404).json({ error: 'User not found' });
+    const updatedStore = await Store.findByIdAndUpdate(id, req.body, { new: true });
+    if (!updatedStore) {
+      return res.status(404).json({ error: 'Store not found' });
     }
-    res.json(updatedUser);
+    res.json(updatedStore);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-// Delete a user by ID
+// Delete a Store by ID
 router.delete('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const deletedUser = await User.findByIdAndDelete(id);
-    if (!deletedUser) {
-      return res.status(404).json({ error: 'User not found' });
+    const deletedStore = await Store.findByIdAndDelete(id);
+    if (!deletedStore) {
+      return res.status(404).json({ error: 'Store not found' });
     }
-    res.json(deletedUser);
+    res.json(deletedStore);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
